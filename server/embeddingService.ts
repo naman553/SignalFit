@@ -27,7 +27,10 @@ export async function embedTexts(texts: string[]): Promise<EmbeddingResponse> {
       `https://generativelanguage.googleapis.com/v1beta/${model}:batchEmbedContents?key=${apiKey}`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
         body: JSON.stringify({
           requests: safeTexts.map((text) => ({
             model,
