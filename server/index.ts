@@ -16,7 +16,7 @@ const upload = multer({
   },
 });
 
-app.use(cors({ origin: ["http://127.0.0.1:5173", "http://localhost:5173"] }));
+app.use(cors({ origin: ["http://127.0.0.1:5173", "http://localhost:5173", "https://signal-fit-mu.vercel.app"] }));
 app.use(express.json({ limit: "5mb" }));
 
 app.get("/api/health", (_request, response) => {
@@ -84,6 +84,6 @@ app.use((error: unknown, _request: express.Request, response: express.Response, 
   response.status(500).json({ error: message });
 });
 
-app.listen(port, "127.0.0.1", () => {
-  console.log(`SignalFit API listening at http://127.0.0.1:${port}`);
+app.listen(port, () => {
+  console.log(`SignalFit API listening at port ${port}`);
 });
