@@ -1,5 +1,5 @@
 import mammoth from "mammoth";
-import { PDFParse } from "pdf-parse";
+import pdf from "pdf-parse";
 
 export type ParsedUpload = {
   id: string;
@@ -42,13 +42,8 @@ async function extractText(file: UploadedFile, extension: string): Promise<strin
 }
 
 async function extractPdfText(buffer: Buffer): Promise<string> {
-  const parser = new PDFParse({ data: buffer });
-  try {
-    const result = await parser.getText();
-    return result.text;
-  } finally {
-    await parser.destroy();
-  }
+  const result = await pdf(buffer);
+  return result.text;
 }
 
 function extensionFor(fileName: string): string {
